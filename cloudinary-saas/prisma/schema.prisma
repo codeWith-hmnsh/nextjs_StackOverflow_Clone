@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model Video {
+  id             String   @id @default(cuid())
+  userId         String?
+  title          String
+  description    String?
+  publicId       String
+  originalSize   String
+  compressedSize String
+  duration       Float?   // Optional duration for non-video files
+  fileType       String   @default("video") // video, image, pdf, etc.
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
